@@ -1,3 +1,4 @@
+// src/models/Book.ts
 import mongoose, { Schema, Document } from 'mongoose';
 
 export enum Genre {
@@ -40,5 +41,11 @@ bookSchema.methods.updateAvailability = function () {
   return this.save();
 };
 
-export default mongoose.model<IBook>('Book', bookSchema);
+bookSchema.set('toJSON', {
+  transform: (_doc, ret) => {
+    delete ret.__v;
+    return ret;
+  }
+});
 
+export default mongoose.model<IBook>('Book', bookSchema);
