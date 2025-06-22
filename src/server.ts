@@ -14,6 +14,9 @@ app.use(express.json())
 app.use('/api', bookRoutes);
 app.use('/api', borrowRoutes);
 
+app.get('/', (_req, res) => {
+  res.send('📚 Book Management API is running!');
+});
 
 app.listen( config.port,() => {
   console.log(`Server is running on port ${config.port}`);
